@@ -1,19 +1,41 @@
-html, body {
-    background-color: #222222;
-}
 
 .stage {
     position: relative;
     width: 100%;
     height: 680px;
 }
-
+ 
 .imgSec {
     position: relative;
     width: 100%;
     height: 100%;
     overflow: hidden;
     background-color: #dddddd;
+
+    .imgFigure {
+        width: 320px;
+        height: 360px;
+        margin: 0;
+        padding: 40px;
+        box-sizing: border-box;
+        background-color: #ffffff;
+        position: absolute;
+
+        img {
+            width: 240px;
+            height: 240px;
+        }
+    }
+
+    figcaption {
+        text-align: center;
+
+        .imgTitle {
+            margin-top: 20px;
+            color: #a7a0a2;
+            font-size: 16px;
+        }
+    }
 }
 
 .controllerNav {

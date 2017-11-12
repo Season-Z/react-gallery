@@ -1,25 +1,37 @@
-import { Component } from 'react';
+import { Component, PropTypes } from 'react';
 import { connect } from 'dva';
+import ImgFigure from '../components/ImgFigure';
 import styles from './Gallery.less';
 
 class Gallery extends Component {
-  renderGallery = (dataList) => {
-    return dataList && dataList.map((value, key) => {
-      const { fileName, title, desc } = value;
+  static PropTypes = {
+    dataList: PropTypes.array
+  };
 
+  // 渲染每个图片
+  renderImgFigure = (dataList) => {
+    return dataList && dataList.map((value, key) => {
+      
       return (
-        <section className={styles.stage} key={key}>
-          <section className={styles.imgSec}></section>
-          <nav className={styles.controllerNav}></nav>
-        </section>
+        <div key={key}>
+          <ImgFigure {...value} />
+        </div>
       );
     });
   };
+  
   render() {
     const { dataList } = this.props;
-    
+
     return (
-      <div>{this.renderGallery(dataList)}</div>
+      <div>
+        <section className={styles.stage}>
+          <section className={styles.imgSec}>
+            {this.renderImgFigure(dataList)}
+          </section>
+          <nav className={styles.controllerNav}></nav>
+        </section>
+      </div>
     );
   }
 }

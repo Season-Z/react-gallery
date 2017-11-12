@@ -3,32 +3,32 @@ export default {
     '/api/gallery': {
         data: [
             {
-                fileName: './src/assets/page1.jpeg',
+                fileName: 'page1.jpg',
                 title: 'page1',
                 desc: 'page1'
             },
             {
-                fileName: './src/assets/page2.jpeg',
+                fileName: 'page2.jpg',
                 title: 'page2',
                 desc: 'page2'
             },
             {
-                fileName: './src/assets/page3.jpeg',
+                fileName: 'page3.jpg',
                 title: 'page3',
                 desc: 'page3'
             },
             {
-                fileName: './src/assets/page4.jpeg',
+                fileName: 'page4.jpg',
                 title: 'page4',
                 desc: 'page4'
             },
             {
-                fileName: './src/assets/page5.jpeg',
+                fileName: 'page5.jpg',
                 title: 'page5',
                 desc: 'page5'
             },
             {
-                fileName: './src/assets/page6.jpeg',
+                fileName: 'page6.jpg',
                 title: 'page6',
                 desc: 'page6'
             }
