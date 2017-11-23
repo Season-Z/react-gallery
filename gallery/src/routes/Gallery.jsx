@@ -3,33 +3,24 @@ import { connect } from 'dva';
 import ImgFigure from '../components/ImgFigure';
 import styles from './Gallery.less';
 
+/**
+ * 获取区间内一个随机数
+ * @param {*} low 
+ * @param {*} high 
+ */
+function getRangeRandom(low, high) {
+  return Math.ceil(Math.random() * (high - low) + low);
+}
+
 class Gallery extends Component {
   static PropTypes = {
     dataList: PropTypes.array
   };
-  Constant = {
-    // 中心区域的图片坐标
-    centerPos: {
-      left: 0,
-      right: 0
-    },
-    // 水平方向上的取值范围，左分区，右分区
-    hPosRange: {
-      leftSecX: [0, 0],
-      rightSecX: [0, 0],
-      y: [0, 0]
-    },
-    // 垂直方向上的取值范围，上分区
-    vPosRange: {
-      x: [0, 0],
-      topY: [0, 0]
-    }
-  };
 
   state = {
-    imgsArrangeArr: []
+    imgsArrangeArr: [],
   };
-  
+
   /**
    * 指定居中centerIndex
    */
@@ -42,27 +33,46 @@ class Gallery extends Component {
       vPosRangeTopY = vPosRange.topY,
       vPosRangeX = vPosRange.x,
 
-      imgsArrangeArr
+      imgsArrangeTopArr = [],
+      topImgNum = Math.ceil(Math.random() * 2), // 取一个或者不取
+      
+      imgsArrangeCenterArr = imgsArrangeArr.splice(centerIndex, 1);
+      
+    // 居中centerIndex的图片
+    imgsArrangeCenterArr[0].pos = centerPos;
+    let topImgSpliceIndex = 0;
+
+    // 取出要布局上侧的图片的状态信息
+    topImgSpliceIndex = Math.ceil(Math.random() * (imgsArrangeArr.length - topImgNum))
+    imgsArrangeTopArr = imgsArrangeArr.splice(topImgSpliceIndex, topImgNum);
+
+    // 布局位于上侧的图片
+    imgsArrangeTopArr.forEach((value, index) => {
+      imgsArrangeTopArr[index].pos = {
+        top: getRangeRandom(vPosRangeTopY[0], vPosRangeTopY[1]),
+        left: getRangeRandom(vPosRangeX[0], vPosRangeX[1])
+      }
+    });
+
+    // 布局左右两侧的图片
+    
   };
-  
   // 渲染每个图片
   renderImgFigure = (dataList) => {
-    return dataList && dataList.map((value, key) => {
-      if (!this.state.imgsArrangeArr[key]) {
+    return dataList && dataList.map((value, index) => {
+      if (!this.state.imgsArrangeArr[index]) {
         this.state.imgsArrangeArr[index] = {
           left: 0,
-          top: 0
+          top: 0,
         };
       }
-      
       return (
-        <div key={key}>
-          <ImgFigure {...value} ref={`imgFigure${key}`} />
+        <div key={index}>
+          <ImgFigure {...value} ref={`imgFigure${index}`} />
         </div>
       );
     });
   };
-  
   componentDidMount() {
     const stageDOM = this.refs.stage,
       stageW = stageDOM.scrollWidth,
@@ -78,7 +88,7 @@ class Gallery extends Component {
 
     this.Constant.centerPos = {
       left: halfStageW - halfImgW,
-      top: halfStageH - halfImgH
+      top: halfStageH - halfImgH,
     };
     this.Constant.hPosRange.leftSecX[0] = -halfImgW;
     this.Constant.hPosRange.leftSecX[1] = halfImgW - halfImgW * 3;
@@ -94,7 +104,24 @@ class Gallery extends Component {
 
     this.rearrange(0);
   }
-  
+  Constant = {
+    // 中心区域的图片坐标
+    centerPos: {
+      left: 0,
+      right: 0,
+    },
+    // 水平方向上的取值范围，左分区，右分区
+    hPosRange: {
+      leftSecX: [0, 0],
+      rightSecX: [0, 0],
+      y: [0, 0],
+    },
+    // 垂直方向上的取值范围，上分区
+    vPosRange: {
+      x: [0, 0],
+      topY: [0, 0],
+    },
+  };
   render() {
     const { dataList } = this.props;
 
