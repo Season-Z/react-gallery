@@ -12,6 +12,7 @@ function IndexPage() {
       <ul className={styles.list}>
         <li><Button type="primary">click</Button></li>
         <li><Link to="/gallery">to gallery</Link></li>
+        <li><Link to="/carousel">to Carousel</Link></li>
       </ul>
     </div>
   );

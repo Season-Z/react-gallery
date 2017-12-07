@@ -25,34 +25,34 @@ class Gallery extends Component {
    * 指定居中centerIndex
    */
   rearrange = (centerIndex) => {
-    const { imgsArrangeArr } = this.state;
-    const { centerPos, vPosRange, hPosRange } = this.Constant;
-    const hPosRangeLeftSecX = hPosRange.leftSecX,
-      hPosRangeRightSecX = hPosRange.rightSecX,
-      hPosRangeY = hPosRange.y,
-      vPosRangeTopY = vPosRange.topY,
-      vPosRangeX = vPosRange.x,
+    // const { imgsArrangeArr } = this.state;
+    // const { centerPos, vPosRange, hPosRange } = this.Constant;
+    // const hPosRangeLeftSecX = hPosRange.leftSecX,
+    //   hPosRangeRightSecX = hPosRange.rightSecX,
+    //   hPosRangeY = hPosRange.y,
+    //   vPosRangeTopY = vPosRange.topY,
+    //   vPosRangeX = vPosRange.x,
 
-      imgsArrangeTopArr = [],
-      topImgNum = Math.ceil(Math.random() * 2), // 取一个或者不取
+    //   imgsArrangeTopArr = [],
+    //   topImgNum = Math.ceil(Math.random() * 2), // 取一个或者不取
       
-      imgsArrangeCenterArr = imgsArrangeArr.splice(centerIndex, 1);
+    //   imgsArrangeCenterArr = imgsArrangeArr.splice(centerIndex, 1);
       
-    // 居中centerIndex的图片
-    imgsArrangeCenterArr[0].pos = centerPos;
-    let topImgSpliceIndex = 0;
+    // // 居中centerIndex的图片
+    // imgsArrangeCenterArr[0].pos = centerPos;
+    // let topImgSpliceIndex = 0;
 
-    // 取出要布局上侧的图片的状态信息
-    topImgSpliceIndex = Math.ceil(Math.random() * (imgsArrangeArr.length - topImgNum))
-    imgsArrangeTopArr = imgsArrangeArr.splice(topImgSpliceIndex, topImgNum);
+    // // 取出要布局上侧的图片的状态信息
+    // topImgSpliceIndex = Math.ceil(Math.random() * (imgsArrangeArr.length - topImgNum))
+    // imgsArrangeTopArr = imgsArrangeArr.splice(topImgSpliceIndex, topImgNum);
 
-    // 布局位于上侧的图片
-    imgsArrangeTopArr.forEach((value, index) => {
-      imgsArrangeTopArr[index].pos = {
-        top: getRangeRandom(vPosRangeTopY[0], vPosRangeTopY[1]),
-        left: getRangeRandom(vPosRangeX[0], vPosRangeX[1])
-      }
-    });
+    // // 布局位于上侧的图片
+    // imgsArrangeTopArr.forEach((value, index) => {
+    //   imgsArrangeTopArr[index].pos = {
+    //     top: getRangeRandom(vPosRangeTopY[0], vPosRangeTopY[1]),
+    //     left: getRangeRandom(vPosRangeX[0], vPosRangeX[1])
+    //   }
+    // });
 
     // 布局左右两侧的图片
     
