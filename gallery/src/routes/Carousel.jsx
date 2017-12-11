@@ -42,18 +42,29 @@ class Carousel extends PureComponent {
                 url: '7.jpg'
             }
         ],
-        activeKey: 0
+        activeKey: 0,
+        prevKey: 0
+    };
+    changePicture = (key) => {
+        const { activeKey } = this.state;
+        
+        this.setState({ 
+            activeKey: key,
+            prevKey: activeKey
+        });
     };
     render () {
-        const { data } = this.state;
+        const { data, activeKey, prevKey } = this.state;
         const imgDOM = [], ctrlBtn = [];
         
         data && data.forEach(({ firTitle, secTitle, url }, key) => {
             const picture = (
                 <div 
                     className={classnames({ 
-                        [styles.mainItem]: true
-                    })} key={key}
+                        [styles.mainItem]: true,
+                        [styles.activeMainItem]: activeKey === key
+                    })} 
+                    key={key}
                 >
                     <img src={require(`../img/${url}`)} alt="轮播图" />
                     <div className={styles.firTitle}>{firTitle}</div>
@@ -62,8 +73,12 @@ class Carousel extends PureComponent {
             );
             const btn = (
                 <span 
-                    className={classnames({ [styles.ctrlItem]: true, [styles.activeCtrlItem]: true })} 
+                    className={classnames({ 
+                        [styles.ctrlItem]: true,
+                        [styles.activeCtrlItem]: activeKey === key
+                    })} 
                     key={key}
+                    onClick={() => this.changePicture(key)}
                 >
                     <img src={require(`../img/${url}`)} alt="轮播图" />
                 </span>
@@ -77,7 +92,13 @@ class Carousel extends PureComponent {
             <div className={styles.content}>
                 <div className={styles.main}>
                     {imgDOM}
-                    <img src={require(`../img/${url}`)} alt="轮播图" />
+                    <div>
+                        <img 
+                            src={require(`../img/${data[prevKey].url}`)} 
+                            alt="轮播图" 
+                            style={{ width: '100%' }}
+                        />
+                    </div>
                 </div>
                 <div className={styles.ctrl}>
                     {ctrlBtn}
